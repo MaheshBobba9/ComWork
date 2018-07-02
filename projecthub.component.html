@@ -1,0 +1,18 @@
+<div id="contentPanel" class="col-lg-12  col-md-12 col-sm-12 col-xs-12 no-padding left" style="background-color: #fff">
+  <div class="col-lg-12 col-md-12 col-sm-12 view-header view-header-manage left" style="padding-left: 0px; padding-right: 0px; background-color: #ffffff;">
+    <div class="col-lg-11 col-md-10 left">Manage Project  [{{project?.projectId}} - {{project?.projectName}}]</div>
+    <div class="col-lg-1  col-md-2 right">
+      <a class="btn btn-md btn-default" (click)="returnToProjects()">Done</a>
+    </div>
+  </div>
+  <div class="col-lg-12 col-md-12  col-sm-12 col-xs-12 no-padding left" style="border-top: 1px solid #ccc; background-color: #f7f7f7;">
+    <pg-tabView orientation="left" (onChange)="onTabChange($event)" id="custom-style-part">
+      <pg-tabPanel header="Participants" [disabled]="this.disableTabs" [selected]="defTab == 1">
+        <scm-projecthub-participant (hasMsg)='onMsg($event)'></scm-projecthub-participant>
+      </pg-tabPanel>
+      <pg-tabPanel header="Hierarchies" [disabled]="this.disableTabs" [selected]="defTab == 2">
+        <scm-projecthub-hierarchy (hasMsg)='onMsg($event)' (getSvcList)="getPrjHierarchies($event)"></scm-projecthub-hierarchy>
+      </pg-tabPanel>
+    </pg-tabView>
+  </div>
+</div>

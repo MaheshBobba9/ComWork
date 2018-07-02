@@ -1,0 +1,29 @@
+
+<div *ngIf="isParticipants" id="contentPanel" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+        <div class="ui-widget-header ui-helper-clearfix" style="padding:4px 25px;border-bottom: 0 none;background-color:#fff;">
+            Filter Participants
+            <div class="right" layout="column" flex-xs="100" flex-sm="100" flex="33" layout-align="center center">
+                <!-- <pg-menu #menu popup="popup" [model]="items" [style]="{'width':'250px'}" appendTo='body' openTop='true'></pg-menu> -->
+                <pg-menu #menu popup="popup" [style]="{'width':'250px'}" [model]="items" [isMoreMenu]="true" appendTo='body' openTop='true'
+                menuTitle="Participant Options"></pg-menu>
+                <button type="button" class="btn btn-tertiary" pButton (click)="menu.toggle($event)"><span class="fa fa-ellipsis-v"></span></button>
+            </div>
+            <br/>
+                <input #fltr id="PartGridSearch"  class="col-lg-6 form-control datatable-search"  type="text" pgInputText size="50" maxLength="200" [(ngModel)]="prjGridSearch">          
+        </div>
+        <div class="col-lg-12 col-md-12 no-padding">
+            <pg-dataTable #partGridTbl  [sortOrder]="1" sortField="lastName" [lazy]="true"  [value]="participantsData" [rows]="10" [paginator]="true" [pageLinks]="7" 
+            [globalFilter]="fltr"  selectionMode="single" (onRowSelect)="onRowSelect($event)" [totalRecords]="participantstotalRecords" (onLazyLoad)="loadparticipantsLazy($event)">
+                <pg-column styleClass="col-lg-1 col-md-1" [sortable]="true"  field="sourceId" header="COM ID"></pg-column>
+                <pg-column styleClass="col-lg-2 col-md-2" [sortable]="true"  field="firstName" header="First Name"></pg-column>
+                <pg-column styleClass="col-lg-2 col-md-2" [sortable]="true"  field="middleName" header="Middle Name"></pg-column>
+                <pg-column styleClass="col-lg-2 col-md-2" [sortable]="true"  field="lastName" header="Last Name" ></pg-column>
+                <pg-column styleClass="col-lg-4 col-md-4" [sortable]="true"  field="email" header="Email"></pg-column>
+                <pg-column styleClass="col-lg-1 col-md-1" [sortable]="true"  field="sourceId" header="Unique ID"></pg-column>
+            </pg-dataTable>
+        </div>
+      </div>
+</div>
+<scm-importcomponent *ngIf="isImportParticipants"></scm-importcomponent>
+<scm-import-error *ngIf="isErrorParticipants"></scm-import-error>
